@@ -3,7 +3,7 @@ import Heading from "./Components/Heading";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import { useSelector, useDispatch } from "react-redux";
-import useAction from "./redux/Hooks/useAction";
+import useAction from "./redux/hooks/useAction";
 import { useEffect, useMemo } from "react";
 import Card from "./Components/Card";
 import Arrow from "./Components/Arrow";
