@@ -11,6 +11,7 @@ function* getPokemon(action) {
       `https://pokeapi.co/api/v2/pokemon/${action.payload.name}`
     );
     pokemon = yield pokemon.json();
+    console.log(pokemon);
     yield put({ type: GET_POKEMON_SUCCESS, pokemon });
   } catch (err) {
     yield put({ type: GET_REQUEST_FAILURE, err });

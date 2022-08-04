@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
-import { GET_POKEDATA, GET_POKEMON, CHANGE } from "./types";
+import { GET_POKEDATA, GET_POKEMON, CHANGE } from "../actions/types";
 
-function useAction(initial) {
+export const useAction = () => {
   const dispatch = useDispatch();
+
   const requestData = (url) => {
     return dispatch({
       type: GET_POKEDATA,
@@ -31,6 +32,4 @@ function useAction(initial) {
   };
 
   return { requestData, change, pokedata };
-}
-
-export default useAction;
+};

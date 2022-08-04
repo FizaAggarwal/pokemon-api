@@ -2,12 +2,11 @@ import Pokemon from "./Components/Pokemon";
 import Heading from "./Components/Heading";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import { useSelector, useDispatch } from "react-redux";
-import useAction from "./redux/hooks/useAction";
+import { useSelector } from "react-redux";
+import { useAction } from "./redux/hooks/useAction";
 import { useEffect, useMemo } from "react";
 import Card from "./Components/Card";
 import Arrow from "./Components/Arrow";
-import { requestData, change, pokedata } from "./redux/actions";
 
 const CustomBox = styled(Box)`
   display: flex;
@@ -26,18 +25,19 @@ function App() {
   const initial = useSelector((state) => state.pokeReducers);
   const { url, data, pokemon, error } = initial;
 
-  //for dispatching actions
-  const dispatch = useDispatch();
+  const { requestData, pokedata, change } = useAction();
 
   //running api once at the beginning
   useEffect(() => {
-    dispatch(requestData(url));
-  }, [dispatch, url]);
+    requestData(url);
+    // eslint-disable-next-line
+  }, [url]);
 
   //setting default pokemon card
   useEffect(() => {
-    dispatch(pokedata("pikachu"));
-  }, [dispatch]);
+    pokedata("pikachu");
+    // eslint-disable-next-line
+  }, []);
 
   //getting 20 pokemons divided into two arrays
   const { array1, array2 } = useMemo(() => {
@@ -56,7 +56,7 @@ function App() {
           <Arrow
             name="previous"
             previous={data.previous}
-            onClick={() => dispatch(change(data.previous))}
+            onClick={() => change(data.previous)}
           />
           <CustomBox>
             {array1 !== 0 &&
@@ -64,7 +64,7 @@ function App() {
                 <Pokemon
                   key={item.id}
                   name={item.name}
-                  onClick={() => dispatch(pokedata(item.name))}
+                  onClick={() => pokedata(item.name)}
                 />
               ))}
           </CustomBox>
@@ -74,14 +74,14 @@ function App() {
                 <Pokemon
                   key={item.id}
                   name={item.name}
-                  onClick={() => dispatch(pokedata(item.name))}
+                  onClick={() => pokedata(item.name)}
                 />
               ))}
           </CustomBox>
           <Arrow
             name="next"
             next={data.next}
-            onClick={() => dispatch(change(data.next))}
+            onClick={() => change(data.next)}
           />
           {Object.keys(pokemon).length !== 0 && <Card pokemon={pokemon} />}
         </Bottom>

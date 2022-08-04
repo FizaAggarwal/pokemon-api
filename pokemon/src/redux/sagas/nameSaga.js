@@ -9,6 +9,7 @@ function* getData(action) {
   try {
     let data = yield fetch(action.payload.url);
     data = yield data.json();
+    console.log(data);
     yield put({ type: GET_DATA_SUCCESS, data });
   } catch (err) {
     yield put({ type: GET_REQUEST_FAILURE, err });
