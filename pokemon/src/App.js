@@ -49,7 +49,7 @@ function App() {
   }, [data]);
 
   return (
-    <CustomBox>
+    <CustomBox style={{ height: "100vh" }}>
       <Heading />
       {error === "" ? (
         <Bottom>
